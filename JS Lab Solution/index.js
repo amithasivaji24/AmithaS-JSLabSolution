@@ -1,7 +1,7 @@
 function Quiz(questions){
     this.score = 0;
     this.questions = questions;
-    this. questionIndex = 0;
+    this.questionIndex = 0;
 }
 
 function Question(text, choices, answer){
@@ -33,16 +33,30 @@ function loadQuestions(){
     if(quiz.isEnded()){
         showScore();
     }else{
+        let element = document.getElementById("question");
+        element.innerHTML = quiz.getQuestionByIndex().text;
+        let choices = quiz.getQuestionByIndex().choices;
+        for(var i = 0; i < choices.length; i++){
+            var elementId = "choice"+i;
+            let choiceElement = document.getElementById(elementId);
+            choiceElement.innerHTML = choices[i];
+            handleOption(i,choices[i]);
+        }
         showProgress();
     }
 }
 
-function handleOption(){
-
+function handleOption(i,choice){
+        var clickElementId = "btn"+i;
+        let clickElement = document.getElementById(clickElementId);
+        clickElement.onclick = function(){
+            quiz.checkOptionWithAnswer(choice);
+            loadQuestions();
+        };
 }
 
 function showProgress(){
-    let currecntQuestionNumber = quiz.questionIndex + 1;
+    let currentQuestionNumber = quiz.questionIndex + 1;
     let element = document.getElementById("progress");
     element.innerHTML = "Question "+currentQuestionNumber+" of "+quiz.questions.length;
 }
@@ -62,8 +76,8 @@ let questions = [
     new Question("Question2",["op1","op2","op3","op4"],"op2"),
     new Question("Question3",["op1","op2","op3","op4"],"op3"),
     new Question("Question4",["op1","op2","op3","op4"],"op4"),
-    new Question("Question5",["op1","op2","op3","op4"],"op2"),
-]
+    new Question("Question5",["op1","op2","op3","op4"],"op2")
+];
 
 let quiz = new Quiz(questions);
 
