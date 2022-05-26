@@ -14,7 +14,7 @@ Quiz.prototype.getQuestionByIndex = function(){
     return this.questions[this.questionIndex];
 }
 
-Quiz.prototype.checkOptionWithAnswer = function(){
+Quiz.prototype.checkOptionWithAnswer = function(answer){
     if(this.getQuestionByIndex().isCorrectAnswer(answer)){
         this.score++;
     }
@@ -72,11 +72,11 @@ function calcPercentage(score, questionLength){
     return(score/questionLength)*100;
 }
 let questions = [
-    new Question("Question1",["op1","op2","op3","op4"],"op1"),
-    new Question("Question2",["op1","op2","op3","op4"],"op2"),
-    new Question("Question3",["op1","op2","op3","op4"],"op3"),
-    new Question("Question4",["op1","op2","op3","op4"],"op4"),
-    new Question("Question5",["op1","op2","op3","op4"],"op2")
+    new Question("Javascript is an _______ language?",["Object-oriented","Object-based","Procedural","None of the above"],"Object-oriented"),
+    new Question("Which of the following keywords is used to define a variable in Javascript?",["var","let","Both A and B","None of the above"],"Both A and B"),
+    new Question("Which of the following methods can be used to display data in some form using Javascript?",["document.write()","console.log()","window.alert()","All of the above"],"All of the above"),
+    new Question("How can a datatype be declared to be a constant type?",["constant","const","var","let"],"const"),
+    new Question("What keyword is used to check whether a given property is valid or not?",["in","is in","exists","lies"],"in")
 ];
 
 let quiz = new Quiz(questions);
